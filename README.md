@@ -216,8 +216,6 @@ Acesse: `http://localhost:8501`
 
 ## 🌐 Ferramenta Interativa
 
-Este projeto faz parte da disciplina **Sistemas Inteligentes Aplicados** e segue as 7 etapas propostas:
-
 #### Foto real com análise de features:
 ![foto-real](assets/images/real-photo.png)
 
