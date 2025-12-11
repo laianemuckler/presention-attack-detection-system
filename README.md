@@ -2,10 +2,10 @@
 
 ## 📋 Descrição do Projeto
 
-Sistema inteligente para detectar ataques de apresentação (presentation attacks) em sistemas de verificação biométrica facial, identificando tentativas de fraude usando fotos impressas através da análise de bordas artificiais e texturas.
+Sistema inteligente para detectar ataques de apresentação (presentation attacks) em sistemas de verificação biométrica facial, identificando tentativas de fraude usando foto de foto através da análise de bordas artificiais e texturas.
 
 **Disciplina:** Sistemas Inteligentes Aplicados  
-**Problema:** Vulnerabilidade de sistemas biométricos faciais a fotos impressas  
+**Problema:** Vulnerabilidade de sistemas biométricos faciais a fotos impressas e displays digitais  
 **Solução:** Classificador baseado em ML clássico que detecta bordas artificiais
 
 ---
@@ -16,7 +16,7 @@ Desenvolver um MVP funcional que:
 
 - ✅ Detecte automaticamente faces em imagens
 - ✅ Extraia features de bordas artificiais, textura e frequência
-- ✅ Classifique imagens como "Real" ou "Fake" (foto impressa)
+- ✅ Classifique imagens como "Real" ou "Fake" 
 - ✅ Forneça interface web intuitiva com visualizações
 - ✅ Apresente score de confiança da detecção
 
@@ -46,13 +46,7 @@ Output: Real/Fake + Confiança
 
 ```
 presentation-attack/
-├── src/
-│   ├── __init__.py
-│   ├── face_detector.py       # Detecção e alinhamento facial
-│   ├── feature_extraction.py  # Extração de features (bordas, LBP, etc)
-│   ├── classifier.py          # Modelos ML (Random Forest, SVM)
-│   ├── utils.py               # Funções auxiliares
-│   └── app.py                 # Interface Streamlit
+├── assets/
 ├── data/
 │   ├── raw/                   # Dados originais (separados em fake e real)
 │   ├── processed/             # Dados processados
@@ -64,16 +58,19 @@ presentation-attack/
 │       └── fake/
 ├── models/
 │   └── trained_model.pkl      # Modelo treinado
-├── notebooks/
-│   └── exploratory_analysis.ipynb
-├── docs/
-│   ├── relatorio_tecnico.md
-│   └── referencias.md
+├── results/
+│    ├── random_forest/        # confusion_matrix, error_rates, feature_importance, metrics_comparison
+│    └── svm/                 
 ├── scripts/
 │   ├── data_preparation.py
 │   └── train.py
-├── tests/
-│   └── test_classifier.py
+├── src/
+│   ├── __init__.py
+│   ├── face_detector.py       # Detecção e alinhamento facial
+│   ├── feature_extraction.py  # Extração de features (bordas, LBP, etc)
+│   ├── classifier.py          # Modelos ML (Random Forest, SVM)
+│   ├── utils.py               # Funções auxiliares
+│   └── app.py                 # Interface Streamlit
 ├── requirements.txt
 └── README.md
 ```
@@ -107,6 +104,30 @@ pip install -r requirements.txt
 
 ## 💻 Como Usar
 
+### Preparar o Dataset
+#### Opção A: Dataset Mínimo para Teste (Recomendado para início)
+
+```bash
+# 2.1. Criar estrutura de diretórios
+mkdir -p data/raw/real data/raw/fake
+
+# 2.2. Adicionar pelo menos 20 imagens de cada classe
+# Real: Selfies de pessoas diferentes
+# Fake: Fotos dessas selfies impressas e fotografadas
+```
+
+**Dica:** Comece com 20-50 imagens por classe para testes rápidos.
+
+#### Opção B: Download de Dataset Público
+
+**NUAA Photograph Imposter Database:**
+
+1. Acesse: [NUAA Photograph Imposter Database](https://parnec.nuaa.edu.cn/_upload/tpl/02/db/731/template731/pages/xtan/NUAAImposterDB_download.html)
+2. Baixe o dataset
+3. Extraia e separe as fotos por real e fake dentro das pastas em `data/raw/`
+
+---
+
 ### Treinamento do Modelo
 
 ```bash
@@ -125,8 +146,27 @@ streamlit run src/app.py
 
 Acesse: `http://localhost:8501`
 
+---
+
+```bash
+# 3.1. Processar e dividir dataset
+python scripts/data_preparation.py
+
+# Saída esperada:
+# ✅ Faces detectadas e extraídas
+# ✅ Imagens redimensionadas para 224x224
+# ✅ Dataset dividido em train/val/test (70/15/15)
+```
+
+**Verificar resultado:**
+
+```bash
+ls data/train/real/  # Deve ter ~70% das imagens reais
+ls data/train/fake/  # Deve ter ~70% das imagens fake
+```
 
 ---
+
 
 ## 🔬 Técnicas de IA Utilizadas
 
@@ -171,7 +211,6 @@ Acesse: `http://localhost:8501`
 - **Accuracy**: Precisão geral
 - **Precision/Recall**: Balanceamento entre falsos positivos/negativos
 - **F1-Score**: Média harmônica
-- **ROC-AUC**: Curva de performance
 - **FAR/FRR**: Taxa de falsos aceites/rejeições
 
 
@@ -186,7 +225,7 @@ Acesse: `http://localhost:8501`
 
 ---
 
-## 🎓 Ferramenta Interativa
+## 🌐 Ferramenta Interativa
 
 Este projeto faz parte da disciplina **Sistemas Inteligentes Aplicados** e segue as 7 etapas propostas:
 
@@ -195,7 +234,7 @@ Foto com análise de features:
 ![foto-real](assets/images/real-photo.png)
 
 Resultado da Análise:
-![resultado-da-analise](assets/images/results-real-photo.pngng)
+![resultado-da-analise](assets/images/results-real-photo.png)
 
 ### Foto de tentativa de ataque de apresentação:
 Foto com análise de features:
@@ -207,11 +246,9 @@ Resultado da Análise:
 
 ---
 
-## 🚧 Trabalhos Futuros
+## 🚧 Implementações Futuras
 
 - [ ] Implementar CNN para comparação de performance
 - [ ] Adicionar detecção de ataques em vídeo (análise temporal)
-- [ ] Suporte a máscaras 3D e ataques de replay
 - [ ] Otimização para processamento em tempo real
-- [ ] Deploy em produção (API REST)
-
+- [ ] Deploy em produção
