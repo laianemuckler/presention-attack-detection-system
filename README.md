@@ -49,11 +49,18 @@ presentation-attack/
 ├── assets/
 ├── data/
 │   ├── raw/                   # Dados originais (separados em fake e real)
-│   ├── processed/             # Dados processados
-│   ├── train/
 │   │   ├── real/
 │   │   └── fake/
-│   └── test/
+│   ├── processed/             # Dados processados
+│   │   ├── real/
+│   │   └── fake/
+│   ├── test/                 # Dados de teste
+│   │   ├── real/
+│   │   └── fake/
+│   |── train/                # Dados de treinamento
+│   |   ├── real/
+│   |   └── fake/
+│   └── val/                  # Dados de validação
 │       ├── real/
 │       └── fake/
 ├── models/
@@ -148,24 +155,6 @@ Acesse: `http://localhost:8501`
 
 ---
 
-```bash
-# 3.1. Processar e dividir dataset
-python scripts/data_preparation.py
-
-# Saída esperada:
-# ✅ Faces detectadas e extraídas
-# ✅ Imagens redimensionadas para 224x224
-# ✅ Dataset dividido em train/val/test (70/15/15)
-```
-
-**Verificar resultado:**
-
-```bash
-ls data/train/real/  # Deve ter ~70% das imagens reais
-ls data/train/fake/  # Deve ter ~70% das imagens fake
-```
-
----
 
 
 ## 🔬 Técnicas de IA Utilizadas
