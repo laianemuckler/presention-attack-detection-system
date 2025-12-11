@@ -218,18 +218,17 @@ Acesse: `http://localhost:8501`
 
 Este projeto faz parte da disciplina **Sistemas Inteligentes Aplicados** e segue as 7 etapas propostas:
 
-### Foto real:
-Foto com análise de features:
+#### Foto real com análise de features:
 ![foto-real](assets/images/real-photo.png)
 
-Resultado da Análise:
+#### Resultado da Análise:
 ![resultado-da-analise](assets/images/results-real-photo.png)
 
-### Foto de tentativa de ataque de apresentação:
+#### Foto de tentativa de ataque de apresentação:
 Foto com análise de features:
 ![foto-de-ataque-apresentacao](assets/images/photo-presentation.png)
 
-Resultado da Análise:
+#### Resultado da Análise:
 ![resultado-da-analise](assets/images/results-photo-presentation.png)
 
 
